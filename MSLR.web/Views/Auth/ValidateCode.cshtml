@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Validate SCC";
+}
+
+<h2>Validate SCC Code</h2>
+
+<form asp-action="ValidateCode" method="post">
+    <input type="text" name="scc" placeholder="Enter SCC code" required />
+    <button type="submit">Verify</button>
+
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div style="color:red; margin-top:10px;">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+</form>
+

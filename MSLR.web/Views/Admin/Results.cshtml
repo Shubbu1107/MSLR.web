@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MSLR.web.ViewModels.ResultViewModel>
+
+@{
+    ViewData["Title"] = "Election Results";
+}
+
+<h2 class="mb-4">Election Results</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Referendum</th>
+            <th>Total Votes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.TotalVotes</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Dashboard" class="btn btn-secondary mt-3">
+    ← Back to Dashboard
+</a>

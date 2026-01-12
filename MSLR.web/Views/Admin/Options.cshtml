@@ -1,0 +1,27 @@
+﻿@model MSLR.web.Models.Referendum
+
+<h2>Options for: @Model.Title</h2>
+
+@if (Model.Status == "open")
+{
+    <div class="alert alert-warning">
+        This referendum is open. Options are read-only.
+    </div>
+}
+else
+{
+    <form method="post" asp-action="AddOption">
+        <input type="hidden" name="referendumId" value="@Model.ReferendumId" />
+        <input name="optionText" class="form-control mb-2" placeholder="Option text" required />
+        <button class="btn btn-primary">Add Option</button>
+    </form>
+}
+
+<ul class="mt-3">
+    @foreach (var opt in Model.ReferendumOptions)
+    {
+        <li>@opt.OptionText</li>
+    }
+</ul>
+
+<a asp-action="Dashboard">Back</a>

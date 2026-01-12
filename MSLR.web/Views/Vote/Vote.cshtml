@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MSLR.web.Models.ReferendumOption>
+
+@{
+    ViewData["Title"] = "Cast Your Vote";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+
+                    <h3 class="card-title text-center mb-4">
+                        🗳️ Cast Your Vote
+                    </h3>
+
+                   
+                    <div class="mb-3">
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-sm"
+                                onclick="history.back();">
+                            ← Back
+                        </button>
+                    </div>
+
+                    <form asp-action="Vote" method="post">
+
+                        @foreach (var option in Model)
+                        {
+                            <div class="form-check mb-2">
+                                <input class="form-check-input"
+                                       type="radio"
+                                       name="optionId"
+                                       value="@option.OptionId"
+                                       required />
+
+                                <label class="form-check-label">
+                                    @option.OptionText
+                                </label>
+                            </div>
+                        }
+
+                        <input type="hidden"
+                               name="referendumId"
+                               value="@Model.First().ReferendumId" />
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                Submit Vote
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

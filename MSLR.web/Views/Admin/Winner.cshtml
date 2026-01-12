@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Referendum Winner";
+}
+
+<h2>Referendum Result</h2>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-warning">
+        @ViewBag.Message
+    </div>
+}
+else
+{
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Winning Option</h4>
+
+            <p>
+                <strong>@ViewBag.Option</strong><br />
+                Votes received: <strong>@ViewBag.Votes</strong>
+            </p>
+
+            @if (ViewBag.Majority)
+            {
+                <span class="badge bg-success">
+                    ✔ Majority reached (50%)
+                </span>
+            }
+            else
+            {
+                <span class="badge bg-warning text-dark">
+                    ⚠ Majority not reached yet
+                </span>
+            }
+        </div>
+    </div>
+}
+
+<a asp-action="Dashboard" class="btn btn-secondary mt-3">
+    ← Back to Dashboard
+</a>

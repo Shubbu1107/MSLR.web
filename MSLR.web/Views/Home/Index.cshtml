@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-5">
+
+   
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">🗳️ Online Referendum Voting System</h1>
+        <p class="lead mt-3">
+            A secure and transparent web-based voting platform that allows
+            registered voters to participate in official referendums online.
+        </p>
+    </div>
+
+ 
+    <div class="row text-center mb-5">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">🔐 Secure Access</h5>
+                    <p class="card-text">
+                        Only registered voters with a valid SCC code can log in
+                        and cast a vote. Each voter can vote only once.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">🗳️ Fair Voting</h5>
+                    <p class="card-text">
+                        Votes are stored securely in the database and protected
+                        against duplicate submissions.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">📊 Transparent Results</h5>
+                    <p class="card-text">
+                        Administrators can view live voting statistics and
+                        final referendum results.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="text-center">
+
+        @if (Context.Session.GetInt32("VoterId") == null)
+        {
+            <a asp-controller="Auth"
+               asp-action="Login"
+               class="btn btn-primary btn-lg me-3">
+                Login
+            </a>
+
+            <a asp-controller="Auth"
+               asp-action="Register"
+               class="btn btn-outline-secondary btn-lg">
+                Register
+            </a>
+        }
+        else if (Context.Session.GetString("Role") == "Admin")
+        {
+            <a asp-controller="Admin"
+               asp-action="Dashboard"
+               class="btn btn-warning btn-lg">
+                Go to Admin Dashboard
+            </a>
+        }
+        else
+        {
+            <a asp-controller="Vote"
+               asp-action="Index"
+               class="btn btn-success btn-lg">
+                Vote Now
+            </a>
+        }
+
+    </div>
+
+</div>

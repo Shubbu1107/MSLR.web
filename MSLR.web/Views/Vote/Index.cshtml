@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MSLR.web.Models.Referendum>
+
+@{
+    ViewData["Title"] = "Available Referendums";
+    var voted = ViewBag.Voted as List<int> ?? new List<int>();
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Available Referendums</h2>
+
+
+@if (Model == null || Model.Count() == 0)
+{
+    <p>No active referendums available.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var refItem in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body d-flex flex-column justify-content-between">
+
+                        <div>
+                            <h5 class="card-title">@refItem.Title</h5>
+                        </div>
+
+                        <div class="mt-3 text-end">
+                            @if (voted.Contains(refItem.ReferendumId))
+                            {
+                                <span class="badge bg-success px-3 py-2">
+                                    ✔ Already voted
+                                </span>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary"
+                                   asp-action="Vote"
+                                   asp-route-referendumId="@refItem.ReferendumId">
+                                    Vote now
+                                </a>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+</div>

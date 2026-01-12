@@ -1,0 +1,91 @@
+﻿@model IEnumerable<MSLR.web.Models.Referendum>
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2 class="mb-4">Admin Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Voters</h5>
+                <p class="card-text display-6">@ViewBag.TotalVoters</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Votes Cast</h5>
+                <p class="card-text display-6">@ViewBag.TotalVotes</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white bg-dark mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Referendums</h5>
+                <p class="card-text display-6">@ViewBag.TotalReferendums</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h4>Manage Referendums</h4>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var refItem in Model)
+        {
+            <tr>
+                <td>@refItem.Title</td>
+                <td>
+                    <span class="badge @(refItem.Status == "open" ? "bg-success" : "bg-secondary")">
+                        @refItem.Status
+                    </span>
+                </td>
+                <td>
+                    <a asp-action="Options"
+                       asp-route-id="@refItem.ReferendumId"
+                       class="btn btn-sm btn-outline-primary">
+                        Manage Options
+                    </a>
+
+                    <a asp-action="ToggleStatus"
+                       asp-route-id="@refItem.ReferendumId"
+                       class="btn btn-sm btn-outline-warning ms-2">
+                        @(refItem.Status == "open" ? "Close" : "Open")
+                    </a>
+                    <a asp-action="Winner"
+                       asp-route-id="@refItem.ReferendumId"
+                       class="btn btn-sm btn-outline-success ms-2">
+                        View Winner
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-success mt-3">
+    + Create Referendum
+</a>
+
+<a asp-action="Results"
+   asp-controller="Admin"
+   class="btn btn-outline-primary mt-3 ms-2">
+    View Results
+</a>
