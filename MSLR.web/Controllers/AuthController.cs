@@ -34,6 +34,23 @@ namespace MSLR.web.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            //Age validation    
+            var today = DateTime.Today;
+            var dob = model.DOB.ToDateTime(TimeOnly.MinValue);
+
+            int age = today.Year - dob.Year;
+            if (dob > today.AddYears(-age))
+            {
+                age--;
+            }
+
+            if (age < 18)
+            {
+                ViewBag.Error = "You must be at least 18 years old to register and vote.";
+                return View(model);
+            }
+
+
             //SCC validation
             var scc = _context.ValidSccs.FirstOrDefault(s => s.Scc == model.SCC);
             if (scc == null)

@@ -14,9 +14,11 @@ namespace MSLR.web.Controllers.Api
             _context = context;
         }
 
-        
+
         //Get  referendums by status
-        
+
+        //mslr/referendums?status=1
+
         [HttpGet("referendums")]
         public IActionResult GetReferendumsByStatus([FromQuery] string status)
         {
