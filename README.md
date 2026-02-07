@@ -48,17 +48,12 @@ GET /mslr/referendum/{id}
 
 ##⭐ Key Highlights
 
--Role-based access control
-
--Duplicate vote prevention
-
--Clean MVC architecture
-
--REST API design and JSON responses
-
--Production-style error handling
-
--Database-driven winner calculation
+- Role-based access control
+- Duplicate vote prevention
+- Clean MVC architecture
+- REST API design and JSON responses
+- Production-style error handling
+- Database-driven winner calculation
 
 ---
 ##📁 Project Structure
